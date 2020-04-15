@@ -1,0 +1,21 @@
+# amplify/backend/api/photo-albums/schema.graphql
+
+type Class @model {
+  id: ID!
+  name: String!
+  department: String!
+  courseNumber: String!
+  exams: [Exam] @connection(keyName: "byClass", fields: ["id"])
+}
+
+
+type Exam @model 
+  @key(name: "byClass", fields: ["classID"]) {
+  id: ID!
+  classID: ID!
+  name: String!
+  bucket: String!
+  semester: String!
+  professor: String!
+  uploader: String!
+}
