@@ -5,12 +5,13 @@ export const getClass = /* GraphQL */ `
   query GetClass($id: ID!) {
     getClass(id: $id) {
       id
-      name
+      department
+      className
       exams {
         items {
           id
           classID
-          name
+          className
           bucket
           semester
           professor
@@ -30,7 +31,8 @@ export const listClasss = /* GraphQL */ `
     listClasss(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
+        department
+        className
         exams {
           nextToken
         }
@@ -44,7 +46,7 @@ export const getExam = /* GraphQL */ `
     getExam(id: $id) {
       id
       classID
-      name
+      className
       bucket
       semester
       professor
@@ -62,7 +64,7 @@ export const listExams = /* GraphQL */ `
       items {
         id
         classID
-        name
+        className
         bucket
         semester
         professor

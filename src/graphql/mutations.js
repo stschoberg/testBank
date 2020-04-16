@@ -8,12 +8,13 @@ export const createClass = /* GraphQL */ `
   ) {
     createClass(input: $input, condition: $condition) {
       id
-      name
+      department
+      className
       exams {
         items {
           id
           classID
-          name
+          className
           bucket
           semester
           professor
@@ -31,12 +32,13 @@ export const updateClass = /* GraphQL */ `
   ) {
     updateClass(input: $input, condition: $condition) {
       id
-      name
+      department
+      className
       exams {
         items {
           id
           classID
-          name
+          className
           bucket
           semester
           professor
@@ -54,12 +56,13 @@ export const deleteClass = /* GraphQL */ `
   ) {
     deleteClass(input: $input, condition: $condition) {
       id
-      name
+      department
+      className
       exams {
         items {
           id
           classID
-          name
+          className
           bucket
           semester
           professor
@@ -78,7 +81,7 @@ export const createExam = /* GraphQL */ `
     createExam(input: $input, condition: $condition) {
       id
       classID
-      name
+      className
       bucket
       semester
       professor
@@ -94,7 +97,7 @@ export const updateExam = /* GraphQL */ `
     updateExam(input: $input, condition: $condition) {
       id
       classID
-      name
+      className
       bucket
       semester
       professor
@@ -110,7 +113,7 @@ export const deleteExam = /* GraphQL */ `
     deleteExam(input: $input, condition: $condition) {
       id
       classID
-      name
+      className
       bucket
       semester
       professor

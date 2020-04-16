@@ -5,12 +5,13 @@ export const onCreateClass = /* GraphQL */ `
   subscription OnCreateClass {
     onCreateClass {
       id
-      name
+      department
+      className
       exams {
         items {
           id
           classID
-          name
+          className
           bucket
           semester
           professor
@@ -25,12 +26,13 @@ export const onUpdateClass = /* GraphQL */ `
   subscription OnUpdateClass {
     onUpdateClass {
       id
-      name
+      department
+      className
       exams {
         items {
           id
           classID
-          name
+          className
           bucket
           semester
           professor
@@ -45,12 +47,13 @@ export const onDeleteClass = /* GraphQL */ `
   subscription OnDeleteClass {
     onDeleteClass {
       id
-      name
+      department
+      className
       exams {
         items {
           id
           classID
-          name
+          className
           bucket
           semester
           professor
@@ -66,7 +69,7 @@ export const onCreateExam = /* GraphQL */ `
     onCreateExam {
       id
       classID
-      name
+      className
       bucket
       semester
       professor
@@ -79,7 +82,7 @@ export const onUpdateExam = /* GraphQL */ `
     onUpdateExam {
       id
       classID
-      name
+      className
       bucket
       semester
       professor
@@ -92,7 +95,7 @@ export const onDeleteExam = /* GraphQL */ `
     onDeleteExam {
       id
       classID
-      name
+      className
       bucket
       semester
       professor
