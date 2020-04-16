@@ -4,17 +4,5 @@ type Class @model {
   id: String!
   department: String!
   className: String!
-  exams: [Exam] @connection(keyName: "byClass", fields: ["id"])
-}
-
-
-type Exam @model 
-  @key(name: "byClass", fields: ["classID"]) {
-  id: ID!
-  classID: String!
-  className: String!
-  bucket: String!
-  semester: String!
-  professor: String!
-  uploader: String!
+  exams: [String!]
 }

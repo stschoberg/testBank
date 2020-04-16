@@ -11,7 +11,6 @@ class ClassTable extends Component {
 
   handleSort = (clickedColumn) => () => {
     const { column, data, direction } = this.state
-    console.log(data)
     if (column !== clickedColumn) {
       this.setState({
         column: clickedColumn,
@@ -52,10 +51,10 @@ class ClassTable extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {_.map(data.slice(this.state.data.slice(this.state.page * 25,(this.state.page + 1) * 25)), ({ id, className }) => (
+          {_.map(data, ({ id, className }) => (
             <Table.Row key={id}>
               <Table.Cell>
-              <NavLink to={`/class/${id}`} id={id}>{id}</NavLink>
+              <NavLink to={`/class/${id}`}>{id}</NavLink>
               </Table.Cell>
               <Table.Cell>{className}</Table.Cell>
             </Table.Row>

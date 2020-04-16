@@ -31,7 +31,6 @@ class ClassTableLoader extends React.Component {
 
 
     render() {
-        console.log("LOADING")
       return (
           <div>
         <Dropdown
