@@ -38,7 +38,8 @@ class S3ImageUpload extends React.Component {
             }
             }
           );
-          console.log('Uploaded file: ', result);
+
+
           this.setState({uploading: false});
 
           // Add filename to list of associated filenames for class
@@ -69,7 +70,14 @@ class S3ImageUpload extends React.Component {
                 onChange={this.handleChange}
                 style={{ display: 'none' }}
               />
-            <Form.Button onClick={this.onChange}>{this.state.uploading? "Uploading...": "Submit"}</Form.Button>
+            <Form.Button 
+              onClick={this.onChange}
+              disabled={this.state.fileName === '' || 
+                        this.props.metaData['professor'] === '' ||
+                        this.props.metaData['semester'] === '' ||
+                        this.props.metaData['documentName' === '']}
+              content={this.state.uploading? "Uploading...": "Submit"}/>
+
             </Form.Group> 
             </div>
           );

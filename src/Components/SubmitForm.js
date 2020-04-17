@@ -38,6 +38,7 @@ class SubmitForm extends React.Component{
         <Form>
         <Form.Group widths='equal'>
           <Form.Field
+            error={this.state.documentName === ''}
             id='form-input-control-document-name'
             control={Input}
             name="documentName"
@@ -46,6 +47,7 @@ class SubmitForm extends React.Component{
             onChange={this.handleChange}
           />
           <Form.Field
+            error={this.state.semester === ''}
             control={Select}
             name="semester"
             options={semesterOptions}
@@ -57,6 +59,7 @@ class SubmitForm extends React.Component{
           />
         </Form.Group>
         <Form.Field
+            error={this.state.professor === ''}
             name="professor"
             id='form-input-control-professor'
             control={Input}
