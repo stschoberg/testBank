@@ -44,7 +44,8 @@ class S3ImageUpload extends React.Component {
 
           // Add filename to list of associated filenames for class
           const data = await API.graphql(graphqlOperation(Queries.getClassDetails(this.props.classID)))
-          var exams = data.data.getClass.exams
+          // If no filenames associated with class
+          var exams = data.data.getClass.exams ? data.data.getClass.exams : []
           exams.push(fileName)
           await API.graphql(graphqlOperation(Queries.updateClass(this.props.classID, exams)))
 
@@ -59,7 +60,6 @@ class S3ImageUpload extends React.Component {
               <Form.Group>
               <Form.Button
                 onClick={() => document.getElementById('add-image-file-input').click()}
-                disabled={this.state.fileLoaded}
                 icon='file image outline'
                 content={ this.state.fileLoaded ? this.state.fileName : 'Choose Document' }
               />
