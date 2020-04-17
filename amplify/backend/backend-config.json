@@ -1,12 +1,5 @@
 {
-	"auth": {
-		"photoalbumapp054be896": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"customAuth": false
-		}
-	},
+	"auth": {},
 	"api": {
 		"photoalbumapp": {
 			"service": "AppSync",

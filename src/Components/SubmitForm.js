@@ -1,11 +1,13 @@
 import React from 'react'
 import {Label, Form, Input, TextArea, Button, Select } from 'semantic-ui-react'
 import S3ImageUpload from './S3ImageUpload'
-const semesterOptions = [
-    { key: 'fall2020', text: 'fall2020', value: 'fall2020' },
-    { key: 'spring2019', text: 'spring2019', value: 'spring2019' },
-    { key: 'fall2019', text: 'fall2019', value: 'fall2019' },
-  ]
+import getPastSemesters from '../Util'
+
+
+
+const util = require('../Util');
+const pastSems = util.getPastSemesters()
+
 
 class SubmitForm extends React.Component{
     constructor(props){
@@ -15,10 +17,9 @@ class SubmitForm extends React.Component{
             professor: '',
             semester: '',
             documentName: '',
-            file: ''
+            file: '',
         }
     }
-
 
     handleChange = (event, {value}) => {
         // console.log(event.target.value)
@@ -50,7 +51,7 @@ class SubmitForm extends React.Component{
             error={this.state.semester === ''}
             control={Select}
             name="semester"
-            options={semesterOptions}
+            options={pastSems}
             label={{ children: 'Semester', htmlFor: 'form-select-control-semester' }}
             placeholder='Semester'
             onChange={this.handleChange}
