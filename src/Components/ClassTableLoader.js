@@ -40,7 +40,7 @@ class ClassTableLoader extends React.Component {
         selection
         options={blah}
         onChange={this.getVal}
-      />     
+      />  
       <Connect query={graphqlOperation(Queries.getClasses(this.state.value))}>
           {({ data, loading, errors }) => {
             if (loading) { return <div>Loading...</div>; }

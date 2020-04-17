@@ -4,12 +4,6 @@ import { Connect } from 'aws-amplify-react';
 import { graphqlOperation }  from 'aws-amplify';
 import ClassDetails from './ClassDetails';
 
-const vars = {
-    id: "test123",
-	department: "testdept",
-	className: "testname",
-	exams: ["exam1", "exam2"]
-}
 class ClassDetailsLoader extends React.Component{
     render() {
         return (

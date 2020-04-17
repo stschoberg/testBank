@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import _ from 'lodash'
 import { NavLink } from 'react-router-dom'
 import { Storage, graphqlOperation, API } from 'aws-amplify';
@@ -12,19 +12,27 @@ class ClassDetailsTable extends React.Component{
 
     state = {
         column: null,
-        data: '',
+        data: [],
         direction: null,
+        metaData: {
+
+        }
       }
 
     componentDidMount () {
-        this.getExams().then(x => this.setState({data:x}))
+      console.log("SHIT")
+        this.setState({data: this.getExams()})
+        console.log("STATE")
+        console.log(this.state.data)
     }
 
 
 
      getExams = async () => {
         const d =  await API.graphql(graphqlOperation(Queries.getClassDetails(this.props.classID))).then(res => res.data.getClass.exams)
-        return d
+        const q = _.map(d, async fileName => await Storage.get(`uploads/${fileName}`, {download: true})
+              .then(x => x.Metadata).catch(x=>"NONE"))
+        return q
     }
 
       handleSort = (clickedColumn) => () => {
@@ -44,10 +52,18 @@ class ClassDetailsTable extends React.Component{
           direction: direction === 'ascending' ? 'descending' : 'ascending',
         })
       }
+
+
+      handleDownload = async(classID) => {
+          console.log("DOWNLOAD")
+          console.log(classID)
+          const link = await Storage.get(`uploads/${classID}`, {download: true}).then(x=>console.log(x))
+          // window.open(link, '_blank')
+          console.log(link)
+      }
     render(){ 
-        console.log(this.state)
+        console.log(this.state.data.length)
         const { column, data, direction } = this.state
-        const exams = this.getExams()
         // const z = exams.then(x => console.log(x))
         // console.log("Z")
 
@@ -82,7 +98,10 @@ class ClassDetailsTable extends React.Component{
             //  console.log("SHIT")
             <Table.Row key={id}>
               <Table.Cell>
-                {}                
+              <Button onClick={() => this.handleDownload(id)} animated='fade'>
+                <Button.Content visible>{id.documentName}</Button.Content>
+                <Button.Content hidden>Download</Button.Content>
+                </Button>            
               </Table.Cell>
               <Table.Cell>{id}</Table.Cell>
             </Table.Row>
