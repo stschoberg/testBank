@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "aws-amplify": "^3.0.8",
     "aws-amplify-react": "^4.1.7",
+    "file-saver": "^2.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-promise": "^3.0.2",

@@ -1,5 +1,4 @@
 import React from 'react'
-import {v4 as uuid} from 'uuid';
 import { Form } from 'semantic-ui-react';
 import { Storage, graphqlOperation, API } from 'aws-amplify';
 import * as Queries from '../Queries'
@@ -22,13 +21,10 @@ class S3ImageUpload extends React.Component {
     }
     onChange = async () => {
         const file = this.state.file
-        const fileName = uuid()
-
+        var fileName = "".concat(this.props.metaData['documentName'], "_", this.props.metaData['semester'], "_", this.props.metaData['professor'])
+        fileName = fileName.replace(/.\s/g, '');
         this.setState({uploading: true})
 
-        console.log(file)
-        console.log("PROPS")
-        console.log(this.props.metaData)
         const c = this.props.metaData
         // Upload file to s3
         const result = await Storage.put(

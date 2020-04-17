@@ -3,8 +3,10 @@ import { Table, Button } from 'semantic-ui-react'
 import _ from 'lodash'
 import { Storage, graphqlOperation, API } from 'aws-amplify';
 import * as Queries from '../Queries'
+import { saveAs } from 'file-saver';
 
 
+const FileSaver = require('file-saver');
 
 class ClassDetailsTable extends React.Component{
     constructor(props){
@@ -71,13 +73,17 @@ class ClassDetailsTable extends React.Component{
         })
       }
 
+      download = (fileName, filePath) =>{
 
+        FileSaver.saveAs(filePath, fileName);
+
+
+      }
       handleDownload = async(classID) => {
           console.log("DOWNLOAD")
           console.log(classID)
-          const link = await Storage.get(`uploads/${classID}`, {download: true}).then(x=>console.log(x))
-          // window.open(link, '_blank')
-          console.log(link)
+          await Storage.get(`uploads/${classID.filename}`).then(x=>this.download(classID.filename, x))
+          // console.log(link)
       }
     render(){ 
       console.log("YOYOYOY")
