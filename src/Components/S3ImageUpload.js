@@ -9,6 +9,7 @@ class S3ImageUpload extends React.Component {
 
         this.state = {
             uploading: false,
+            fileLoaded: false,
             file: '',
             fileName: ''
         }
@@ -16,7 +17,7 @@ class S3ImageUpload extends React.Component {
     handleChange = (e) => {
       const n = e.target.files[0].name
       const f = e.target.files[0]
-      this.setState({uploading: true, file: f, fileName: n})
+      this.setState({fileLoaded: true, file: f, fileName: n})
 
     }
     onChange = async () => {
@@ -24,8 +25,6 @@ class S3ImageUpload extends React.Component {
         var fileName = "".concat(this.props.metaData['documentName'], "_", this.props.metaData['semester'], "_", this.props.metaData['professor'])
         fileName = fileName.replace(/.\s/g, '');
         this.setState({uploading: true})
-
-        const c = this.props.metaData
         // Upload file to s3
         const result = await Storage.put(
             fileName, 
@@ -46,9 +45,9 @@ class S3ImageUpload extends React.Component {
           const data = await API.graphql(graphqlOperation(Queries.getClassDetails(this.props.classID)))
           var exams = data.data.getClass.exams
           exams.push(fileName)
-          const res = await API.graphql(graphqlOperation(Queries.updateClass(this.props.classID, exams)))
+          await API.graphql(graphqlOperation(Queries.updateClass(this.props.classID, exams)))
 
-          // window.location.reload(false);
+          window.location.reload(false);
 
     }
 
@@ -59,9 +58,9 @@ class S3ImageUpload extends React.Component {
               <Form.Group>
               <Form.Button
                 onClick={() => document.getElementById('add-image-file-input').click()}
-                disabled={this.state.uploading}
+                disabled={this.state.fileLoaded}
                 icon='file image outline'
-                content={ this.state.uploading ? this.state.fileName : 'Choose Document' }
+                content={ this.state.fileLoaded ? this.state.fileName : 'Choose Document' }
               />
               <input
                 id='add-image-file-input'
@@ -70,7 +69,7 @@ class S3ImageUpload extends React.Component {
                 onChange={this.handleChange}
                 style={{ display: 'none' }}
               />
-            <Form.Button onClick={this.onChange}>Submit</Form.Button>
+            <Form.Button onClick={this.onChange}>{this.state.uploading? "Uploading...": "Submit"}</Form.Button>
             </Form.Group> 
             </div>
           );

@@ -20,16 +20,6 @@ class SubmitForm extends React.Component{
     }
 
 
-    setDocName = (e, {val}) => {
-        this.setState({document: val})
-    }
-    setProf = (e, {val}) => {
-        this.setState({professor: val})
-    }
-    setSemester = (e, {val}) => {
-        this.setState({semester: val})
-    }
-
     handleChange = (event, {value}) => {
         // console.log(event.target.value)
         // console.log(event.target.name)
